@@ -2,22 +2,17 @@
 
 # LLM Planning Pipelines
 
-This repository provides tools to evaluate the capability of LLMs to generate PDDL files or plans from textual task descriptions.
+This repo provides multiple pipelines that enhance PDDL generation through documentation.
 
 ---
 
-## 🔧 Setup
 
-Make sure you are using Python 3. Then install required dependencies (if any).
-
----
-
-## 🚀 Run: LLM-as-Formalizer
+## 🚀 Running Example: LLM-as-Formalizer
 
 To generate PDDL files from textual descriptions:
 
 ```bash
-python3 source/llm-as-formalizer.py \
+python source/llm-as-formalizer.py \
   --domain DOMAIN \
   --model MODEL \
   --data DATA \
@@ -35,11 +30,9 @@ python3 source/llm-as-formalizer.py \
   * `logistics`
 * `MODEL`: One of
 
-  * `gpt-3.5-turbo`, `gpt-4o-mini`, `gpt-4o`, `o1-preview`
-  * `google/gemma-2-9b-it`, `google/gemma-2-27b-it`
-  * `meta-llama/Meta-Llama-3.1-8B-Instruct`, `meta-llama/Llama-3.1-70B-Instruct`, `meta-llama/Llama-3.1-405B-Instruct`, `meta-llama/Llama-3.3-70B-Instruct`
-  * `deepseek-ai/DeepSeek-R1-Distill-Qwen-32B`, `deepseek-ai/DeepSeek-R1-Distill-Llama-70B`, `deepseek-ai/DeepSeek-R1-Distill-Llama-8B`
-  * `o3-mini`
+  * `deepseek/deepseek-r1-distill-llama-70b`, `deepseek/deepseek-r1-distill-qwen-14b`
+  * `meta-llama/llama-4-scout-17b-16e-instruct`, `meta-llama/llama-4-maverick-17b-128e-instruct`
+  * `QwQ-32B`, `Qwen3-8B`
 * `DATA`: One of
 
   * `Heavily_Templated_BlocksWorld-100`
@@ -63,29 +56,7 @@ Results will be saved to:
 
 ---
 
-## 🧠 Run: LLM-as-Planner
 
-To generate plans directly using LLMs:
-
-```bash
-cd source
-python3 source/llm-as-planner.py \
-  --domain DOMAIN \
-  --model MODEL \
-  --data DATA \
-  --index_start INDEX_START \
-  --index_end INDEX_END
-```
-
-### Output
-
-Results will be saved to:
-
-```
-/outputs/llm-as-planner/DOMAIN/DATA/MODEL/
-```
-
----
 
 ## 🧩 Run Solver
 
@@ -113,7 +84,7 @@ python3 source/run_solver.py \
 To evaluate the output using [VAL](https://github.com/KCL-Planning/VAL), run:
 
 ```bash
-python3 source/run_val.py \
+python source/run_val.py \
   --domain DOMAIN \
   --model MODEL \
   --data DATA \
@@ -121,34 +92,5 @@ python3 source/run_val.py \
   --index_end INDEX_END \
   --prediction_type PREDICTION_TYPE \
   [--csv_result]
-```
-
-### Arguments
-
-* `PREDICTION_TYPE`: One of
-
-  * `llm-as-formalizer`
-  * `llm-as-planner`
-* `--csv_result`: Optional flag to export results (plans + errors) to CSV.
-
-### Output
-
-CSV results will be saved to:
-
-```
-/outputs/PREDICTION_TYPE/DOMAIN/DATA/MODEL/
-```
-
----
-
-## 📁 Folder Structure
-
-```
-outputs/
-├── llm-as-formalizer/
-│   └── DOMAIN/DATA/MODEL/
-├── llm-as-planner/
-│   └── DOMAIN/DATA/MODEL/
-└── ... (csv results if --csv_result is enabled)
 ```
 
